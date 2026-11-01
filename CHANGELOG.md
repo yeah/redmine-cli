@@ -12,6 +12,10 @@ the project adheres to [Semantic Versioning](https://semver.org/).
   now wrapped in `{"wiki_page": {...}}`, mirroring the Redmine API like
   `issues get` (`{"issue": {...}}`) and `users me` (`{"user": {...}}`)
   already do. Update `jq` paths from `.text` to `.wiki_page.text`.
+- A 403 under OAuth now names the scope stored with the token and, for
+  commands with a known requirement, the scope the command needs (e.g.
+  `search` needs `search_project`). Exit code stays 4. README and the
+  skill document the scope each command group requires.
 
 ### Added
 
