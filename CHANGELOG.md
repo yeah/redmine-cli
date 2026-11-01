@@ -6,6 +6,13 @@ the project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+
+- **Breaking for JSON consumers:** `wiki get` and `wiki put` JSON output is
+  now wrapped in `{"wiki_page": {...}}`, mirroring the Redmine API like
+  `issues get` (`{"issue": {...}}`) and `users me` (`{"user": {...}}`)
+  already do. Update `jq` paths from `.text` to `.wiki_page.text`.
+
 ### Added
 
 - `issues get --include allowed_statuses` is documented and rendered: the
@@ -13,6 +20,8 @@ the project adheres to [Semantic Versioning](https://semver.org/).
 - `issues update --confirm` prints the resulting values of the fields it
   sent, e.g. `Updated issue #42 (status: Resolved (3), done: 100%).`; the
   JSON output carries the re-read `issue`
+- `--agent --help` carries an `example_output` field on `issues get`,
+  `wiki get`, and `users me` sketching the JSON shape of the response.
 
 ### Fixed
 

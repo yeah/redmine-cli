@@ -237,7 +237,12 @@ When `--config` is omitted, the default
     ./redmine-cli custom-fields list
     ./redmine-cli version
 
-See `./redmine-cli --agent --help` for machine-readable help.
+JSON output mirrors the Redmine API shape: single objects are wrapped
+(`{"issue": {...}}`, `{"wiki_page": {...}}`, `{"user": {...}}`), lists in
+their plural key (`{"issues": [...]}`, `{"wiki_pages": [...]}`).
+
+See `./redmine-cli --agent --help` for machine-readable help; `get`-style
+commands include an `example_output` sketch of their JSON response.
 
 Redmine answers a `PUT /issues/{id}.json` with HTTP 200 even when it drops a
 field it will not apply — a status transition the user's role is not allowed
