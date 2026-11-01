@@ -96,8 +96,8 @@ Wiki pages are always scoped to a project (`--project` is required).
 | Get a page as JSON | `redmine-cli wiki get Architecture --project myproj --format json` |
 | Get raw page source (bytes untouched) | `redmine-cli wiki get Architecture --project myproj --raw` |
 | Save page source to a file | `redmine-cli wiki get Architecture --project myproj -o page.md` |
-| Create or update a page | `redmine-cli wiki put MyPage --project myproj --text "h1. Hello"` |
-| Create from file | `redmine-cli wiki put MyPage --project myproj --text-file page.textile --comments "Initial draft"` |
+| Create or update a page | `redmine-cli wiki put MyPage --project myproj --text "# Hello"` |
+| Create from file | `redmine-cli wiki put MyPage --project myproj --text-file page.md --comments "Initial draft"` |
 | Update with optimistic locking | `redmine-cli wiki put MyPage --project myproj --text-file page.md --version 12` |
 | Actually send (not dry-run) | append `--confirm` |
 
@@ -129,7 +129,10 @@ Notes:
 - `wiki put` uses idempotent PUT — it **creates** the page if it doesn't exist, **updates** it if it does.
 - **Write ops are dry-run by default.** Always inspect the preview before adding `--confirm`.
 - `--text` and `--text-file` are mutually exclusive; exactly one is required.
-- Page content uses Redmine's configured markup format - by default this is **CommonMark** (GitHub-flavored Markdown).
+- Page content uses the instance's configured text formatting - **CommonMark**
+  (Markdown) on current Redmine versions by default, **Textile** on older or
+  reconfigured instances. The API does not expose the setting; the examples
+  above assume CommonMark. When unsure, look at an existing page first.
 - Wiki content is sent as raw text via `--text` — Redmine parses it according to the project's markup setting. No need to pre-render or wrap in HTML.
 - Link other pages with `[[Page]]`, not `[text](url)`; see
   [Redmine formatting](#redmine-formatting) for the link shorthands and macros.
